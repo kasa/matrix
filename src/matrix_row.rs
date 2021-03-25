@@ -129,6 +129,7 @@ where
 mod tests {
 	use super::MatrixRowMajor;
 	use crate::Matrix;
+	use crate::MatrixDense;
 
 	#[test]
 	fn row_major() {
@@ -185,5 +186,29 @@ mod tests {
 		assert_eq!(A[1][1], 3.0);
 		assert_eq!(A[2][0], 4.0);
 		assert_eq!(A[2][1], 5.0);
+	}
+
+	#[test]
+	fn index_access() {
+		let (m, n) = (3, 2);
+		let d = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0];
+		let A = MatrixRowMajor::from_vec(m, n, d);
+
+		assert_eq!(1.0, A[0][0]);
+		assert_eq!(2.0, A[0][1]);
+		assert_eq!(3.0, A[1][0]);
+		assert_eq!(4.0, A[1][1]);
+		assert_eq!(5.0, A[2][0]);
+		assert_eq!(6.0, A[2][1]);
+	}
+
+	#[test]
+	fn col_ld_eq_2() {
+		// access by column
+		let (m, n) = (3, 2);
+		let d = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0];
+		let A = MatrixRowMajor::from_vec(m, n, d);
+
+		assert_eq!(2, A.ld());
 	}
 }
