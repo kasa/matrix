@@ -138,12 +138,17 @@ mod tests {
 	}
 
 	#[test]
-	fn col_access() {
-		// access by column
+	fn index_access() {
 		const M: usize = 3;
 		const N: usize = 2;
 		let d = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0];
 		let A: FixedMatrixColMajor<_, M, N> = FixedMatrixColMajor::from_vec(d);
-		println!("X {:?}", &A[0]);
+
+		assert_eq!(1.0, A[0][0]);
+		assert_eq!(2.0, A[0][1]);
+		assert_eq!(3.0, A[0][2]);
+		assert_eq!(4.0, A[1][0]);
+		assert_eq!(5.0, A[1][1]);
+		assert_eq!(6.0, A[1][2]);
 	}
 }

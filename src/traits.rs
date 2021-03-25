@@ -30,3 +30,15 @@ where
 {
 	fn ld(&self) -> usize;
 }
+
+pub trait FixedMatrix<T, const M: usize, const N: usize>:
+	ops::Index<(usize, usize), Output = T>
+	+ ops::IndexMut<(usize, usize), Output = T>
+	+ ops::Index<usize, Output = [T]>
+where
+	T: num_traits::Zero,
+{
+	fn as_ptr(&self) -> *const T;
+	fn as_mut_ptr(&mut self) -> *mut T;
+	fn layout(&self) -> LayoutScheme;
+}
